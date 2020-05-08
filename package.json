@@ -1,0 +1,48 @@
+{
+  "name": "cap-angular-contentful",
+  "version": "0.0.1",
+  "description": "Angular module with a Contentful API Service",
+  "private": false,
+  "author": {
+    "name": "Software Allies",
+    "url": "https://softwareallies.com"
+  },
+  "contributors": [
+    {
+      "email": "cesar_alonso_m_g@hotmail.com",
+      "name": "César Alonso Magaña Gavilanes",
+      "url": "https://github.com/cesar-alonso-magana"
+    }
+  ],
+  "keywords": [
+    "angular",
+    "contentful",
+    "cap-generator",
+    "cap-angular-contentful",
+    "contentful service",
+    "angular 8",
+    "angular 9"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/software-allies/cap-angular-contentful"
+  },
+  "peerDependencies": {
+    "@angular/common": "^8.2.14",
+    "@angular/core": "^8.2.14",
+    "@auth0/angular-jwt": "^3.0.1",
+    "uuid": "^3.3.3",
+    "tslib": "^1.9.0"
+  },
+  "license": "MIT",
+  "main": "bundles/cap-angular-contentful.umd.js",
+  "module": "fesm5/cap-angular-contentful.js",
+  "es2015": "fesm2015/cap-angular-contentful.js",
+  "esm5": "esm5/cap-angular-contentful.js",
+  "esm2015": "esm2015/cap-angular-contentful.js",
+  "fesm5": "fesm5/cap-angular-contentful.js",
+  "fesm2015": "fesm2015/cap-angular-contentful.js",
+  "typings": "cap-angular-contentful.d.ts",
+  "metadata": "cap-angular-contentful.metadata.json",
+  "sideEffects": false
+}
