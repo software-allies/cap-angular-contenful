@@ -1,17 +1,18 @@
-import { Injectable, Optional } from '@angular/core';
-import { IConfig } from '../interfaces/config.interface';
+import { Injectable, Inject } from '@angular/core';
+import { ConfigInterface } from '../interfaces/config.interface';
 
 @Injectable()
 export class ConfigService {
-  accessToken: string;
-  space: string;
-  environment: string;
+  space_id: string = '';
+  environmet: string = '';
+  delivery_accessToken: string = '';
 
-  constructor(@Optional() config: IConfig) {
-    if (config) {
-      this.accessToken = config.accessToken;
-      this.space = config.space;
-      this.environment = config.environment;
+  constructor(@Inject(Object) private data: ConfigInterface) {
+    if (data) {
+      this.space_id = this.data.space_id;
+      this.environmet = this.data.environmet;
+      this.delivery_accessToken = this.data.delivery_accessToken;
+
     }
   }
 }

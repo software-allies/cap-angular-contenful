@@ -1,5 +1,5 @@
-export interface IConfig {
-  accessToken: string;
-  space: string;
-  environment: string;
+export interface ConfigInterface {
+  space_id: string;
+  environmet: string;
+  delivery_accessToken: string;
 }
