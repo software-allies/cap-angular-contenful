@@ -1,7 +1,11 @@
-import { IConfig } from '../interfaces/config.interface';
+import { ConfigInterface } from '../interfaces/config.interface';
+import * as i0 from "@angular/core";
 export declare class ConfigService {
-    accessToken: string;
-    space: string;
-    environment: string;
-    constructor(config: IConfig);
+    private data;
+    space_id: string;
+    environmet: string;
+    delivery_accessToken: string;
+    constructor(data: ConfigInterface);
+    static ɵfac: i0.ɵɵFactoryDef<ConfigService, never>;
+    static ɵprov: i0.ɵɵInjectableDef<ConfigService>;
 }

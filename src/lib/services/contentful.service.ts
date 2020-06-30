@@ -34,7 +34,7 @@ export class CapContentfulService {
 */
   getItems(contentType: string, limit?: number, skip?: number): Observable<any> {
     limit ? limit = limit : limit = 100;
-
+    skip ? skip = skip : skip = 0;
     const _url = `${this.baseUrl}entries?content_type=${contentType}&limit=${limit}&skip=${skip}`;
     return this._http.get<any>(_url, this.httpOptions)
       .pipe(
@@ -75,6 +75,7 @@ export class CapContentfulService {
 */
   getElementsByContentType(contentType: string, limit?: number, skip?: number) {
     limit ? limit = limit : limit = 100;
+    skip ? skip = skip : skip = 0;
     let _url = `${this.baseUrl}entries?content_type=${contentType}&limit=${limit}&skip=${skip}`
     return this._http.get<any>(_url, this.httpOptions)
       .pipe(

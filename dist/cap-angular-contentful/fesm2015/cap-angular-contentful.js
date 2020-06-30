@@ -1,110 +1,35 @@
-import { __decorate, __param } from 'tslib';
-import { Optional, Injectable, ɵɵdefineInjectable, ɵɵinject, NgModule } from '@angular/core';
-import { HttpHeaders, HttpClient, HttpClientModule } from '@angular/common/http';
+import { ɵɵinject, ɵɵdefineInjectable, ɵsetClassMetadata, Injectable, Inject, ɵɵdefineNgModule, ɵɵdefineInjector, ɵɵsetNgModuleScope, NgModule } from '@angular/core';
+import { HttpClientModule, HttpHeaders, HttpClient } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 import { throwError } from 'rxjs';
 import { map, tap, catchError } from 'rxjs/operators';
-import { CommonModule } from '@angular/common';
 
-let ConfigService = class ConfigService {
-    constructor(config) {
-        if (config) {
-            this.accessToken = config.accessToken;
-            this.space = config.space;
-            this.environment = config.environment;
+class ConfigService {
+    constructor(data) {
+        this.data = data;
+        this.space_id = '';
+        this.environmet = '';
+        this.delivery_accessToken = '';
+        if (data) {
+            this.space_id = this.data.space_id;
+            this.environmet = this.data.environmet;
+            this.delivery_accessToken = this.data.delivery_accessToken;
         }
     }
-};
-ConfigService.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Optional }] }
-];
-ConfigService = __decorate([
-    Injectable(),
-    __param(0, Optional())
-], ConfigService);
+}
+/** @nocollapse */ ConfigService.ɵfac = function ConfigService_Factory(t) { return new (t || ConfigService)(ɵɵinject(Object)); };
+/** @nocollapse */ ConfigService.ɵprov = ɵɵdefineInjectable({ token: ConfigService, factory: ConfigService.ɵfac });
+/*@__PURE__*/ (function () { ɵsetClassMetadata(ConfigService, [{
+        type: Injectable
+    }], function () { return [{ type: undefined, decorators: [{
+                type: Inject,
+                args: [Object]
+            }] }]; }, null); })();
 
-let CapContentfulService = class CapContentfulService {
-    constructor(_http, configService) {
-        this._http = _http;
-        this.configService = configService;
-        this.httpOptions = {
-            headers: new HttpHeaders({
-                'Authorization': `Bearer ${this.configService.accessToken}`,
-                'Content-Type': 'application/vnd.contentful.delivery.v1+json'
-            }),
-            observe: "response"
-        };
-        this.actionUrl = `https://cdn.contentful.com/spaces/${this.configService.space}/environments/${this.configService.environment}/`;
-    }
-    responseWithRelatedAssets(response, relatedAssetKey) {
-        if (!response.includes ||
-            !response.includes.Asset ||
-            !response.items) {
-            return response;
-        }
-        const includes = response.includes.Asset;
-        const items = response.items;
-        // By each item must be know his related Asset
-        let newItems = [];
-        items.map(item => {
-            relatedAssetKey.map(key => {
-                // Search and replace by a include file
-                let file = includes.filter(a => a.sys.id === item.fields[key].sys.id)[0].fields;
-                const fileClone = file;
-                file = file.file;
-                file['title'] = fileClone.title || '';
-                file['description'] = fileClone.description || '';
-                item.fields[key] = Object.assign({}, item.fields[key], { file });
-                newItems = [...newItems, item];
-            });
-        });
-        response.items = newItems;
-        return response.items;
-    }
-    getItems(contentType, relatedAssetKey) {
-        const _url = `${this.actionUrl}entries?content_type=${contentType}`;
-        return this._http.get(_url, this.httpOptions)
-            .pipe(map((response) => response.body), tap((response) => {
-            if (relatedAssetKey) {
-                return this.responseWithRelatedAssets(response, relatedAssetKey);
-            }
-            else {
-                return response;
-            }
-        }), catchError(error => this.handleError(error)));
-    }
-    getItemById(contentType, id, relatedAssetKey) {
-        const _url = `${this.actionUrl}entries?content_type=${contentType}&fields.id=${id}`;
-        return this._http.get(_url, this.httpOptions)
-            .pipe(map((response) => response.body), tap((response) => {
-            if (relatedAssetKey) {
-                return this.responseWithRelatedAssets(response, relatedAssetKey);
-            }
-            else {
-                return response;
-            }
-        }), catchError(error => this.handleError(error)));
-    }
-    handleError(error) {
-        console.error(error);
-        return throwError(error || 'Server error');
-    }
-};
-CapContentfulService.ctorParameters = () => [
-    { type: HttpClient },
-    { type: ConfigService }
-];
-CapContentfulService.ngInjectableDef = ɵɵdefineInjectable({ factory: function CapContentfulService_Factory() { return new CapContentfulService(ɵɵinject(HttpClient), ɵɵinject(ConfigService)); }, token: CapContentfulService, providedIn: "root" });
-CapContentfulService = __decorate([
-    Injectable({
-        providedIn: 'root'
-    })
-], CapContentfulService);
-
-var CapContentfulModule_1;
-let CapContentfulModule = CapContentfulModule_1 = class CapContentfulModule {
+class CapContentfulModule {
     static forRoot(config) {
         return {
-            ngModule: CapContentfulModule_1,
+            ngModule: CapContentfulModule,
             providers: [
                 {
                     provide: ConfigService,
@@ -113,21 +38,102 @@ let CapContentfulModule = CapContentfulModule_1 = class CapContentfulModule {
             ]
         };
     }
-};
-CapContentfulModule = CapContentfulModule_1 = __decorate([
-    NgModule({
-        declarations: [],
-        imports: [
+}
+/** @nocollapse */ CapContentfulModule.ɵmod = ɵɵdefineNgModule({ type: CapContentfulModule });
+/** @nocollapse */ CapContentfulModule.ɵinj = ɵɵdefineInjector({ factory: function CapContentfulModule_Factory(t) { return new (t || CapContentfulModule)(); }, providers: [
+        ConfigService
+    ], imports: [[
             HttpClientModule,
             CommonModule,
-        ],
-        exports: [],
-        providers: [
-            CapContentfulService
-        ],
-        schemas: []
-    })
-], CapContentfulModule);
+        ]] });
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵɵsetNgModuleScope(CapContentfulModule, { imports: [HttpClientModule,
+        CommonModule] }); })();
+/*@__PURE__*/ (function () { ɵsetClassMetadata(CapContentfulModule, [{
+        type: NgModule,
+        args: [{
+                declarations: [],
+                imports: [
+                    HttpClientModule,
+                    CommonModule,
+                ],
+                exports: [],
+                providers: [
+                    ConfigService
+                ],
+                schemas: []
+            }]
+    }], null, null); })();
+
+class CapContentfulService {
+    constructor(_http, credentials) {
+        this._http = _http;
+        this.credentials = credentials;
+        this.httpOptions = {
+            headers: new HttpHeaders({
+                'Authorization': `Bearer ${credentials.delivery_accessToken}`,
+                'Content-Type': 'application/vnd.contentful.delivery.v1+json'
+            }),
+            observe: "response"
+        };
+        this.baseUrl = `https://cdn.contentful.com/spaces/${this.credentials.space_id}/environments/${this.credentials.environmet}/`;
+    }
+    /**
+   * Return the items related with a specific content type
+   * @param contentType String
+   * @param limit Optional(Number)
+   * @param skip Optional(Number)
+  */
+    getItems(contentType, limit, skip) {
+        limit ? limit = limit : limit = 100;
+        const _url = `${this.baseUrl}entries?content_type=${contentType}&limit=${limit}&skip=${skip}`;
+        return this._http.get(_url, this.httpOptions)
+            .pipe(map((response) => response.body), tap((response) => {
+            return response;
+        }), catchError(error => this.handleError(error)));
+    }
+    /**
+   * Return a specific item by Id
+   * @param entryId String
+  */
+    getItemById(entryId) {
+        let _url = `${this.baseUrl}entries/${entryId}`;
+        return this._http.get(_url, this.httpOptions)
+            .pipe(map((response) => response.body), tap((response) => response), catchError(error => this.handleError(error)));
+    }
+    handleError(error) {
+        console.error(error);
+        return throwError(error || 'Server error');
+    }
+    /**
+   * Return a list of items related with a specific content type
+   * @param contentType String
+   * @param limit Optional(Number)
+   * @param skip Optional(Number)
+  */
+    getElementsByContentType(contentType, limit, skip) {
+        limit ? limit = limit : limit = 100;
+        let _url = `${this.baseUrl}entries?content_type=${contentType}&limit=${limit}&skip=${skip}`;
+        return this._http.get(_url, this.httpOptions)
+            .pipe(map((response) => response.body), tap((response) => response), catchError(error => this.handleError(error)));
+    }
+    /**
+   * Return an item related with a specific assetId
+   * @param assetId String
+  */
+    getAsset(assetId) {
+        let _url = `${this.baseUrl}assets/${assetId}`;
+        return this._http.get(_url, this.httpOptions)
+            .pipe(map((response) => response.body), catchError(error => this.handleError(error)));
+    }
+}
+/** @nocollapse */ CapContentfulService.ɵfac = function CapContentfulService_Factory(t) { return new (t || CapContentfulService)(ɵɵinject(HttpClient), ɵɵinject(ConfigService)); };
+/** @nocollapse */ CapContentfulService.ɵprov = ɵɵdefineInjectable({ token: CapContentfulService, factory: CapContentfulService.ɵfac, providedIn: 'root' });
+/*@__PURE__*/ (function () { ɵsetClassMetadata(CapContentfulService, [{
+        type: Injectable,
+        args: [{
+                providedIn: 'root'
+            }]
+    }], function () { return [{ type: HttpClient }, { type: ConfigService }]; }, null); })();
 
 /*
  * Public API Surface of cap-contentful

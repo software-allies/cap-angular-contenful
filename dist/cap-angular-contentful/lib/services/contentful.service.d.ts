@@ -1,14 +1,38 @@
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ConfigService } from './config.service';
+import * as i0 from "@angular/core";
 export declare class CapContentfulService {
     private _http;
-    private configService;
-    private actionUrl;
+    private credentials;
+    private baseUrl;
     private httpOptions;
-    constructor(_http: HttpClient, configService: ConfigService);
-    responseWithRelatedAssets(response: any, relatedAssetKey: string[]): any;
-    getItems(contentType: string, relatedAssetKey?: string[]): Observable<any>;
-    getItemById(contentType: string, id: string, relatedAssetKey?: string[]): Observable<any>;
+    constructor(_http: HttpClient, credentials: ConfigService);
+    /**
+   * Return the items related with a specific content type
+   * @param contentType String
+   * @param limit Optional(Number)
+   * @param skip Optional(Number)
+  */
+    getItems(contentType: string, limit?: number, skip?: number): Observable<any>;
+    /**
+   * Return a specific item by Id
+   * @param entryId String
+  */
+    getItemById(entryId: string): Observable<any>;
     private handleError;
+    /**
+   * Return a list of items related with a specific content type
+   * @param contentType String
+   * @param limit Optional(Number)
+   * @param skip Optional(Number)
+  */
+    getElementsByContentType(contentType: string, limit?: number, skip?: number): Observable<any>;
+    /**
+   * Return an item related with a specific assetId
+   * @param assetId String
+  */
+    getAsset(assetId: string): Observable<any>;
+    static ɵfac: i0.ɵɵFactoryDef<CapContentfulService, never>;
+    static ɵprov: i0.ɵɵInjectableDef<CapContentfulService>;
 }
