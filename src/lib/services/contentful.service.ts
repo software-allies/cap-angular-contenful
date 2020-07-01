@@ -23,7 +23,7 @@ export class CapContentfulService {
           }),
           observe: "response"
         };
-        this.baseUrl = `https://cdn.contentful.com/spaces/${this.credentials.space_id}/environments/${this.credentials.environmet}/`;
+        this.baseUrl = `https://cdn.contentful.com/spaces/${this.credentials.space_id}/environments/${this.credentials.environment}/`;
       }
   }
 

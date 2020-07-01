@@ -1,5 +1,5 @@
 export default interface ConfigInterface {
   space_id: string;
-  environmet: string;
+  environment: string;
   delivery_accessToken: string;
 }

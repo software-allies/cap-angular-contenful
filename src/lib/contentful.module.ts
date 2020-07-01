@@ -5,19 +5,14 @@ import { CommonModule } from "@angular/common";
 import ConfigInterface from './interfaces/config.interface';
 
 @NgModule({
-  declarations: [
-  ],
+  declarations: [],
   imports: [
     HttpClientModule,
     CommonModule,
   ],
-  exports: [
-  ],
-  providers: [
-    // ConfigService
-  ],
-  schemas: [
-  ]
+  exports: [],
+  providers: [],
+  schemas: []
 })
 export class CapContentfulModule {
   static forRoot(@Optional() config: ConfigInterface): ModuleWithProviders {
