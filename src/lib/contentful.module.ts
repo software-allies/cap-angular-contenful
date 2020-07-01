@@ -1,8 +1,8 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
+import { NgModule, ModuleWithProviders, Optional } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { ConfigService } from './services/config.service';
-import { ConfigInterface } from './interfaces/config.interface';
 import { CommonModule } from "@angular/common";
+import ConfigInterface from './interfaces/config.interface';
 
 @NgModule({
   declarations: [
@@ -14,13 +14,13 @@ import { CommonModule } from "@angular/common";
   exports: [
   ],
   providers: [
-    ConfigService
+    // ConfigService
   ],
   schemas: [
   ]
 })
 export class CapContentfulModule {
-  static forRoot(config: ConfigInterface): ModuleWithProviders {
+  static forRoot(@Optional() config: ConfigInterface): ModuleWithProviders {
     return {
       ngModule: CapContentfulModule,
       providers: [

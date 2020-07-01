@@ -1,9 +1,33 @@
-import { ɵɵinject, ɵɵdefineInjectable, ɵsetClassMetadata, Injectable, Inject, ɵɵdefineNgModule, ɵɵdefineInjector, ɵɵsetNgModuleScope, NgModule } from '@angular/core';
-import { HttpClientModule, HttpHeaders, HttpClient } from '@angular/common/http';
-import { CommonModule } from '@angular/common';
+import { Injectable, ɵɵdefineInjectable, ɵɵinject, NgModule, Optional } from '@angular/core';
+import { HttpHeaders, HttpClient, HttpClientModule } from '@angular/common/http';
 import { throwError } from 'rxjs';
 import { map, tap, catchError } from 'rxjs/operators';
+import { __decorate, __param, __metadata } from 'tslib';
+import { CommonModule } from '@angular/common';
 
+/**
+ * @fileoverview added by tsickle
+ * Generated from: lib/interfaces/config.interface.ts
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * @record
+ */
+function ConfigInterface() { }
+if (false) {
+    /** @type {?} */
+    ConfigInterface.prototype.space_id;
+    /** @type {?} */
+    ConfigInterface.prototype.environmet;
+    /** @type {?} */
+    ConfigInterface.prototype.delivery_accessToken;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * Generated from: lib/services/config.service.ts
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 var ConfigService = /** @class */ (function () {
     function ConfigService(data) {
         this.data = data;
@@ -16,21 +40,255 @@ var ConfigService = /** @class */ (function () {
             this.delivery_accessToken = this.data.delivery_accessToken;
         }
     }
-    /** @nocollapse */ ConfigService.ɵfac = function ConfigService_Factory(t) { return new (t || ConfigService)(ɵɵinject(Object)); };
-    /** @nocollapse */ ConfigService.ɵprov = ɵɵdefineInjectable({ token: ConfigService, factory: ConfigService.ɵfac });
     return ConfigService;
 }());
-/*@__PURE__*/ (function () { ɵsetClassMetadata(ConfigService, [{
-        type: Injectable
-    }], function () { return [{ type: undefined, decorators: [{
-                type: Inject,
-                args: [Object]
-            }] }]; }, null); })();
+if (false) {
+    /** @type {?} */
+    ConfigService.prototype.space_id;
+    /** @type {?} */
+    ConfigService.prototype.environmet;
+    /** @type {?} */
+    ConfigService.prototype.delivery_accessToken;
+    /**
+     * @type {?}
+     * @private
+     */
+    ConfigService.prototype.data;
+}
 
+/**
+ * @fileoverview added by tsickle
+ * Generated from: lib/services/contentful.service.ts
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var CapContentfulService = /** @class */ (function () {
+    function CapContentfulService(_http, credentials) {
+        this._http = _http;
+        this.credentials = credentials;
+        if (credentials) {
+            this.httpOptions = {
+                headers: new HttpHeaders({
+                    'Authorization': "Bearer " + credentials.delivery_accessToken,
+                    'Content-Type': 'application/vnd.contentful.delivery.v1+json'
+                }),
+                observe: "response"
+            };
+            this.baseUrl = "https://cdn.contentful.com/spaces/" + this.credentials.space_id + "/environments/" + this.credentials.environmet + "/";
+        }
+    }
+    /**
+   * Return the items related with a specific content type
+   * @param contentType String
+   * @param limit Optional(Number)
+   * @param skip Optional(Number)
+  */
+    /**
+     * Return the items related with a specific content type
+     * @param {?} contentType String
+     * @param {?=} limit Optional(Number)
+     * @param {?=} skip Optional(Number)
+     * @return {?}
+     */
+    CapContentfulService.prototype.getItems = /**
+     * Return the items related with a specific content type
+     * @param {?} contentType String
+     * @param {?=} limit Optional(Number)
+     * @param {?=} skip Optional(Number)
+     * @return {?}
+     */
+    function (contentType, limit, skip) {
+        var _this = this;
+        limit ? limit = limit : limit = 100;
+        skip ? skip = skip : skip = 0;
+        /** @type {?} */
+        var _url = this.baseUrl + "entries?content_type=" + contentType + "&limit=" + limit + "&skip=" + skip;
+        return this._http.get(_url, this.httpOptions)
+            .pipe(map((/**
+         * @param {?} response
+         * @return {?}
+         */
+        function (response) { return response.body; })), tap((/**
+         * @param {?} response
+         * @return {?}
+         */
+        function (response) {
+            return response;
+        })), catchError((/**
+         * @param {?} error
+         * @return {?}
+         */
+        function (error) { return _this.handleError(error); })));
+    };
+    /**
+   * Return a specific item by Id
+   * @param entryId String
+  */
+    /**
+     * Return a specific item by Id
+     * @param {?} entryId String
+     * @return {?}
+     */
+    CapContentfulService.prototype.getItemById = /**
+     * Return a specific item by Id
+     * @param {?} entryId String
+     * @return {?}
+     */
+    function (entryId) {
+        var _this = this;
+        /** @type {?} */
+        var _url = this.baseUrl + "entries/" + entryId;
+        return this._http.get(_url, this.httpOptions)
+            .pipe(map((/**
+         * @param {?} response
+         * @return {?}
+         */
+        function (response) { return response.body; })), tap((/**
+         * @param {?} response
+         * @return {?}
+         */
+        function (response) { return response; })), catchError((/**
+         * @param {?} error
+         * @return {?}
+         */
+        function (error) { return _this.handleError(error); })));
+    };
+    /**
+     * @private
+     * @param {?} error
+     * @return {?}
+     */
+    CapContentfulService.prototype.handleError = /**
+     * @private
+     * @param {?} error
+     * @return {?}
+     */
+    function (error) {
+        console.error(error);
+        return throwError(error || 'Server error');
+    };
+    /**
+   * Return a list of items related with a specific content type
+   * @param contentType String
+   * @param limit Optional(Number)
+   * @param skip Optional(Number)
+  */
+    /**
+     * Return a list of items related with a specific content type
+     * @param {?} contentType String
+     * @param {?=} limit Optional(Number)
+     * @param {?=} skip Optional(Number)
+     * @return {?}
+     */
+    CapContentfulService.prototype.getElementsByContentType = /**
+     * Return a list of items related with a specific content type
+     * @param {?} contentType String
+     * @param {?=} limit Optional(Number)
+     * @param {?=} skip Optional(Number)
+     * @return {?}
+     */
+    function (contentType, limit, skip) {
+        var _this = this;
+        limit ? limit = limit : limit = 100;
+        skip ? skip = skip : skip = 0;
+        /** @type {?} */
+        var _url = this.baseUrl + "entries?content_type=" + contentType + "&limit=" + limit + "&skip=" + skip;
+        return this._http.get(_url, this.httpOptions)
+            .pipe(map((/**
+         * @param {?} response
+         * @return {?}
+         */
+        function (response) { return response.body; })), tap((/**
+         * @param {?} response
+         * @return {?}
+         */
+        function (response) { return response; })), catchError((/**
+         * @param {?} error
+         * @return {?}
+         */
+        function (error) { return _this.handleError(error); })));
+    };
+    /**
+   * Return an item related with a specific assetId
+   * @param assetId String
+  */
+    /**
+     * Return an item related with a specific assetId
+     * @param {?} assetId String
+     * @return {?}
+     */
+    CapContentfulService.prototype.getAsset = /**
+     * Return an item related with a specific assetId
+     * @param {?} assetId String
+     * @return {?}
+     */
+    function (assetId) {
+        var _this = this;
+        /** @type {?} */
+        var _url = this.baseUrl + "assets/" + assetId;
+        return this._http.get(_url, this.httpOptions)
+            .pipe(map((/**
+         * @param {?} response
+         * @return {?}
+         */
+        function (response) { return response.body; })), catchError((/**
+         * @param {?} error
+         * @return {?}
+         */
+        function (error) { return _this.handleError(error); })));
+    };
+    CapContentfulService.decorators = [
+        { type: Injectable, args: [{
+                    providedIn: 'root'
+                },] }
+    ];
+    /** @nocollapse */
+    CapContentfulService.ctorParameters = function () { return [
+        { type: HttpClient },
+        { type: ConfigService }
+    ]; };
+    /** @nocollapse */ CapContentfulService.ɵprov = ɵɵdefineInjectable({ factory: function CapContentfulService_Factory() { return new CapContentfulService(ɵɵinject(HttpClient), ɵɵinject(ConfigService)); }, token: CapContentfulService, providedIn: "root" });
+    return CapContentfulService;
+}());
+if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    CapContentfulService.prototype.baseUrl;
+    /**
+     * @type {?}
+     * @private
+     */
+    CapContentfulService.prototype.httpOptions;
+    /**
+     * @type {?}
+     * @private
+     */
+    CapContentfulService.prototype._http;
+    /**
+     * @type {?}
+     * @private
+     */
+    CapContentfulService.prototype.credentials;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * Generated from: lib/contentful.module.ts
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 var CapContentfulModule = /** @class */ (function () {
     function CapContentfulModule() {
     }
-    CapContentfulModule.forRoot = function (config) {
+    /**
+     * @param {?} config
+     * @return {?}
+     */
+    CapContentfulModule.forRoot = /**
+     * @param {?} config
+     * @return {?}
+     */
+    function (config) {
         return {
             ngModule: CapContentfulModule,
             providers: [
@@ -41,115 +299,39 @@ var CapContentfulModule = /** @class */ (function () {
             ]
         };
     };
-    /** @nocollapse */ CapContentfulModule.ɵmod = ɵɵdefineNgModule({ type: CapContentfulModule });
-    /** @nocollapse */ CapContentfulModule.ɵinj = ɵɵdefineInjector({ factory: function CapContentfulModule_Factory(t) { return new (t || CapContentfulModule)(); }, providers: [
-            ConfigService
-        ], imports: [[
-                HttpClientModule,
-                CommonModule,
-            ]] });
+    CapContentfulModule.decorators = [
+        { type: NgModule, args: [{
+                    declarations: [],
+                    imports: [
+                        HttpClientModule,
+                        CommonModule,
+                    ],
+                    exports: [],
+                    providers: [
+                    // ConfigService
+                    ],
+                    schemas: []
+                },] }
+    ];
+    __decorate([
+        __param(0, Optional()),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [Object]),
+        __metadata("design:returntype", Object)
+    ], CapContentfulModule, "forRoot", null);
     return CapContentfulModule;
 }());
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵɵsetNgModuleScope(CapContentfulModule, { imports: [HttpClientModule,
-        CommonModule] }); })();
-/*@__PURE__*/ (function () { ɵsetClassMetadata(CapContentfulModule, [{
-        type: NgModule,
-        args: [{
-                declarations: [],
-                imports: [
-                    HttpClientModule,
-                    CommonModule,
-                ],
-                exports: [],
-                providers: [
-                    ConfigService
-                ],
-                schemas: []
-            }]
-    }], null, null); })();
 
-var CapContentfulService = /** @class */ (function () {
-    function CapContentfulService(_http, credentials) {
-        this._http = _http;
-        this.credentials = credentials;
-        this.httpOptions = {
-            headers: new HttpHeaders({
-                'Authorization': "Bearer " + credentials.delivery_accessToken,
-                'Content-Type': 'application/vnd.contentful.delivery.v1+json'
-            }),
-            observe: "response"
-        };
-        this.baseUrl = "https://cdn.contentful.com/spaces/" + this.credentials.space_id + "/environments/" + this.credentials.environmet + "/";
-    }
-    /**
-   * Return the items related with a specific content type
-   * @param contentType String
-   * @param limit Optional(Number)
-   * @param skip Optional(Number)
-  */
-    CapContentfulService.prototype.getItems = function (contentType, limit, skip) {
-        var _this = this;
-        limit ? limit = limit : limit = 100;
-        var _url = this.baseUrl + "entries?content_type=" + contentType + "&limit=" + limit + "&skip=" + skip;
-        return this._http.get(_url, this.httpOptions)
-            .pipe(map(function (response) { return response.body; }), tap(function (response) {
-            return response;
-        }), catchError(function (error) { return _this.handleError(error); }));
-    };
-    /**
-   * Return a specific item by Id
-   * @param entryId String
-  */
-    CapContentfulService.prototype.getItemById = function (entryId) {
-        var _this = this;
-        var _url = this.baseUrl + "entries/" + entryId;
-        return this._http.get(_url, this.httpOptions)
-            .pipe(map(function (response) { return response.body; }), tap(function (response) { return response; }), catchError(function (error) { return _this.handleError(error); }));
-    };
-    CapContentfulService.prototype.handleError = function (error) {
-        console.error(error);
-        return throwError(error || 'Server error');
-    };
-    /**
-   * Return a list of items related with a specific content type
-   * @param contentType String
-   * @param limit Optional(Number)
-   * @param skip Optional(Number)
-  */
-    CapContentfulService.prototype.getElementsByContentType = function (contentType, limit, skip) {
-        var _this = this;
-        limit ? limit = limit : limit = 100;
-        var _url = this.baseUrl + "entries?content_type=" + contentType + "&limit=" + limit + "&skip=" + skip;
-        return this._http.get(_url, this.httpOptions)
-            .pipe(map(function (response) { return response.body; }), tap(function (response) { return response; }), catchError(function (error) { return _this.handleError(error); }));
-    };
-    /**
-   * Return an item related with a specific assetId
-   * @param assetId String
-  */
-    CapContentfulService.prototype.getAsset = function (assetId) {
-        var _this = this;
-        var _url = this.baseUrl + "assets/" + assetId;
-        return this._http.get(_url, this.httpOptions)
-            .pipe(map(function (response) { return response.body; }), catchError(function (error) { return _this.handleError(error); }));
-    };
-    /** @nocollapse */ CapContentfulService.ɵfac = function CapContentfulService_Factory(t) { return new (t || CapContentfulService)(ɵɵinject(HttpClient), ɵɵinject(ConfigService)); };
-    /** @nocollapse */ CapContentfulService.ɵprov = ɵɵdefineInjectable({ token: CapContentfulService, factory: CapContentfulService.ɵfac, providedIn: 'root' });
-    return CapContentfulService;
-}());
-/*@__PURE__*/ (function () { ɵsetClassMetadata(CapContentfulService, [{
-        type: Injectable,
-        args: [{
-                providedIn: 'root'
-            }]
-    }], function () { return [{ type: HttpClient }, { type: ConfigService }]; }, null); })();
-
-/*
- * Public API Surface of cap-contentful
+/**
+ * @fileoverview added by tsickle
+ * Generated from: public-api.ts
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
- * Generated bundle index. Do not edit.
+ * @fileoverview added by tsickle
+ * Generated from: cap-angular-contentful.ts
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 export { CapContentfulModule, CapContentfulService, ConfigService };

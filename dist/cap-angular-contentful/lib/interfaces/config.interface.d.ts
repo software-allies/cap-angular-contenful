@@ -1,4 +1,4 @@
-export interface ConfigInterface {
+export default interface ConfigInterface {
     space_id: string;
     environmet: string;
     delivery_accessToken: string;

@@ -1,6 +1,6 @@
 {
   "name": "cap-angular-contentful",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Angular module with a Contentful API Service",
   "private": false,
   "author": {
@@ -42,11 +42,9 @@
   "fesm5": "fesm5/cap-angular-contentful.js",
   "fesm2015": "fesm2015/cap-angular-contentful.js",
   "typings": "cap-angular-contentful.d.ts",
+  "metadata": "cap-angular-contentful.metadata.json",
   "sideEffects": false,
   "dependencies": {
     "tslib": "^1.10.0"
-  },
-  "scripts": {
-    "prepublishOnly": "node --eval \"console.error('ERROR: Trying to publish a package that has been compiled by Ivy. This is not allowed.\\nPlease delete and rebuild the package, without compiling with Ivy, before attempting to publish.\\n')\" && exit 1"
   }
 }

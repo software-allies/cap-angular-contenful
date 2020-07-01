@@ -15,14 +15,16 @@ export class CapContentfulService {
   constructor(
     private _http: HttpClient,
     private credentials: ConfigService) {
-    this.httpOptions = {
-      headers: new HttpHeaders({
-        'Authorization': `Bearer ${credentials.delivery_accessToken}`,
-        'Content-Type': 'application/vnd.contentful.delivery.v1+json'
-      }),
-      observe: "response"
-    };
-    this.baseUrl = `https://cdn.contentful.com/spaces/${this.credentials.space_id}/environments/${this.credentials.environmet}/`;
+      if(credentials){
+        this.httpOptions = {
+          headers: new HttpHeaders({
+            'Authorization': `Bearer ${credentials.delivery_accessToken}`,
+            'Content-Type': 'application/vnd.contentful.delivery.v1+json'
+          }),
+          observe: "response"
+        };
+        this.baseUrl = `https://cdn.contentful.com/spaces/${this.credentials.space_id}/environments/${this.credentials.environmet}/`;
+      }
   }
 
 

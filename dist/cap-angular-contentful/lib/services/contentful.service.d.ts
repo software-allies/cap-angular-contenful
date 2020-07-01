@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ConfigService } from './config.service';
-import * as i0 from "@angular/core";
 export declare class CapContentfulService {
     private _http;
     private credentials;
@@ -33,6 +32,4 @@ export declare class CapContentfulService {
    * @param assetId String
   */
     getAsset(assetId: string): Observable<any>;
-    static ɵfac: i0.ɵɵFactoryDef<CapContentfulService, never>;
-    static ɵprov: i0.ɵɵInjectableDef<CapContentfulService>;
 }
