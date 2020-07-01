@@ -18,7 +18,7 @@ if (false) {
     /** @type {?} */
     ConfigInterface.prototype.space_id;
     /** @type {?} */
-    ConfigInterface.prototype.environmet;
+    ConfigInterface.prototype.environment;
     /** @type {?} */
     ConfigInterface.prototype.delivery_accessToken;
 }
@@ -32,11 +32,11 @@ var ConfigService = /** @class */ (function () {
     function ConfigService(data) {
         this.data = data;
         this.space_id = '';
-        this.environmet = '';
+        this.environment = '';
         this.delivery_accessToken = '';
         if (data) {
             this.space_id = this.data.space_id;
-            this.environmet = this.data.environmet;
+            this.environment = this.data.environment;
             this.delivery_accessToken = this.data.delivery_accessToken;
         }
     }
@@ -46,7 +46,7 @@ if (false) {
     /** @type {?} */
     ConfigService.prototype.space_id;
     /** @type {?} */
-    ConfigService.prototype.environmet;
+    ConfigService.prototype.environment;
     /** @type {?} */
     ConfigService.prototype.delivery_accessToken;
     /**
@@ -73,7 +73,7 @@ var CapContentfulService = /** @class */ (function () {
                 }),
                 observe: "response"
             };
-            this.baseUrl = "https://cdn.contentful.com/spaces/" + this.credentials.space_id + "/environments/" + this.credentials.environmet + "/";
+            this.baseUrl = "https://cdn.contentful.com/spaces/" + this.credentials.space_id + "/environments/" + this.credentials.environment + "/";
         }
     }
     /**
@@ -307,9 +307,7 @@ var CapContentfulModule = /** @class */ (function () {
                         CommonModule,
                     ],
                     exports: [],
-                    providers: [
-                    // ConfigService
-                    ],
+                    providers: [],
                     schemas: []
                 },] }
     ];

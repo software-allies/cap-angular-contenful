@@ -1,6 +1,6 @@
 {
   "name": "cap-angular-contentful",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Angular module with a Contentful API Service",
   "private": false,
   "author": {
