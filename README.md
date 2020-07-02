@@ -45,8 +45,12 @@ import { CapContentfulService } from 'cap-angular-contentful';
   styleUrls: ['./app.component.scss']
 })
 
-constructor(private contentful: CapContentfulService) {
-  
+export class AppComponent {
+  constructor(private contentful: CapContentfulService){
+    contentful.getElementsByContentType('person').subscribe(resp => {
+      console.log('resp: ', resp);
+    })
+  }
 }
 ```
 
