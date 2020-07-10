@@ -4,9 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
 import { ConfigService } from './config.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class CapContentfulService {
 
   private baseUrl: string;
