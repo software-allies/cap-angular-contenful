@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
 import { ConfigService } from './config.service';
+import { Injectable } from '@angular/core';
 
 @Injectable()
+
 export class CapContentfulService {
 
   private baseUrl: string;
@@ -13,6 +14,7 @@ export class CapContentfulService {
   constructor(
     private _http: HttpClient,
     private credentials: ConfigService) {
+      console.log('credentials: ', credentials);
       if(credentials){
         this.httpOptions = {
           headers: new HttpHeaders({

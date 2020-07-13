@@ -1,14 +1,13 @@
-import { Injectable, ɵɵdefineInjectable, ɵɵinject, NgModule, Optional } from '@angular/core';
-import { HttpHeaders, HttpClient, HttpClientModule } from '@angular/common/http';
+import { Injectable, NgModule } from '@angular/core';
+import { HttpHeaders, HttpClientModule } from '@angular/common/http';
 import { throwError } from 'rxjs';
 import { map, tap, catchError } from 'rxjs/operators';
-import { __decorate, __param, __metadata } from 'tslib';
 import { CommonModule } from '@angular/common';
 
 /**
  * @fileoverview added by tsickle
  * Generated from: lib/interfaces/config.interface.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @record
@@ -26,20 +25,26 @@ if (false) {
 /**
  * @fileoverview added by tsickle
  * Generated from: lib/services/config.service.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var ConfigService = /** @class */ (function () {
     function ConfigService(data) {
-        this.data = data;
         this.space_id = '';
         this.environment = '';
         this.delivery_accessToken = '';
         if (data) {
-            this.space_id = this.data.space_id;
-            this.environment = this.data.environment;
-            this.delivery_accessToken = this.data.delivery_accessToken;
+            this.space_id = data.space_id;
+            this.environment = data.environment;
+            this.delivery_accessToken = data.delivery_accessToken;
         }
     }
+    ConfigService.decorators = [
+        { type: Injectable }
+    ];
+    /** @nocollapse */
+    ConfigService.ctorParameters = function () { return [
+        { type: undefined }
+    ]; };
     return ConfigService;
 }());
 if (false) {
@@ -49,17 +54,12 @@ if (false) {
     ConfigService.prototype.environment;
     /** @type {?} */
     ConfigService.prototype.delivery_accessToken;
-    /**
-     * @type {?}
-     * @private
-     */
-    ConfigService.prototype.data;
 }
 
 /**
  * @fileoverview added by tsickle
  * Generated from: lib/services/contentful.service.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var CapContentfulService = /** @class */ (function () {
     function CapContentfulService(_http, credentials) {
@@ -236,17 +236,6 @@ var CapContentfulService = /** @class */ (function () {
          */
         function (error) { return _this.handleError(error); })));
     };
-    CapContentfulService.decorators = [
-        { type: Injectable, args: [{
-                    providedIn: 'root'
-                },] }
-    ];
-    /** @nocollapse */
-    CapContentfulService.ctorParameters = function () { return [
-        { type: HttpClient },
-        { type: ConfigService }
-    ]; };
-    /** @nocollapse */ CapContentfulService.ɵprov = ɵɵdefineInjectable({ factory: function CapContentfulService_Factory() { return new CapContentfulService(ɵɵinject(HttpClient), ɵɵinject(ConfigService)); }, token: CapContentfulService, providedIn: "root" });
     return CapContentfulService;
 }());
 if (false) {
@@ -275,7 +264,7 @@ if (false) {
 /**
  * @fileoverview added by tsickle
  * Generated from: lib/contentful.module.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var CapContentfulModule = /** @class */ (function () {
     function CapContentfulModule() {
@@ -307,29 +296,25 @@ var CapContentfulModule = /** @class */ (function () {
                         CommonModule,
                     ],
                     exports: [],
-                    providers: [],
+                    providers: [
+                        CapContentfulService
+                    ],
                     schemas: []
                 },] }
     ];
-    __decorate([
-        __param(0, Optional()),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", [Object]),
-        __metadata("design:returntype", Object)
-    ], CapContentfulModule, "forRoot", null);
     return CapContentfulModule;
 }());
 
 /**
  * @fileoverview added by tsickle
  * Generated from: public-api.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
  * Generated from: cap-angular-contentful.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 export { CapContentfulModule, CapContentfulService, ConfigService };

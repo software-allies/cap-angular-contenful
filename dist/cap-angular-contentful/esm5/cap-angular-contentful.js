@@ -1,7 +1,7 @@
 /**
  * @fileoverview added by tsickle
  * Generated from: cap-angular-contentful.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Generated bundle index. Do not edit.
