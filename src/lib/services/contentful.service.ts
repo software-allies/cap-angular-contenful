@@ -14,7 +14,6 @@ export class CapContentfulService {
   constructor(
     private _http: HttpClient,
     private credentials: ConfigService) {
-      console.log('credentials: ', credentials);
       if(credentials){
         this.httpOptions = {
           headers: new HttpHeaders({

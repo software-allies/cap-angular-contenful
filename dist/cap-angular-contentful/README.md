@@ -1,9 +1,9 @@
 # CAP CONTENTFUL [![Generic badge](https://img.shields.io/badge/CAP-Active-<COLOR>.svg)](https://shields.io/)
 
-**CAP CONTENTFUL** is a module for **Angular**
+**CAP CONTENTFUL** is a module for **Angular** 
 
-* CapContentfulService
-
+The version 1.0.0 for Angular 9.
+The version 0.1.7 for Angular 8.
 
 ## Installation
 ```

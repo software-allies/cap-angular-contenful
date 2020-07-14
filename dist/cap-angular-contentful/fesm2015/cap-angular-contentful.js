@@ -1,5 +1,5 @@
 import { Injectable, NgModule } from '@angular/core';
-import { HttpHeaders, HttpClientModule } from '@angular/common/http';
+import { HttpHeaders, HttpClient, HttpClientModule } from '@angular/common/http';
 import { throwError } from 'rxjs';
 import { map, tap, catchError } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
@@ -32,13 +32,14 @@ class ConfigService {
      * @param {?} data
      */
     constructor(data) {
+        this.data = data;
         this.space_id = '';
         this.environment = '';
         this.delivery_accessToken = '';
-        if (data) {
-            this.space_id = data.space_id;
-            this.environment = data.environment;
-            this.delivery_accessToken = data.delivery_accessToken;
+        if (this.data) {
+            this.space_id = this.data.space_id;
+            this.environment = this.data.environment;
+            this.delivery_accessToken = this.data.delivery_accessToken;
         }
     }
 }
@@ -56,6 +57,11 @@ if (false) {
     ConfigService.prototype.environment;
     /** @type {?} */
     ConfigService.prototype.delivery_accessToken;
+    /**
+     * @type {?}
+     * @private
+     */
+    ConfigService.prototype.data;
 }
 
 /**
@@ -190,6 +196,14 @@ class CapContentfulService {
         error => this.handleError(error))));
     }
 }
+CapContentfulService.decorators = [
+    { type: Injectable }
+];
+/** @nocollapse */
+CapContentfulService.ctorParameters = () => [
+    { type: HttpClient },
+    { type: ConfigService }
+];
 if (false) {
     /**
      * @type {?}

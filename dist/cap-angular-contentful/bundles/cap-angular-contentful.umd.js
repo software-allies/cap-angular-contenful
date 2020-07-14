@@ -29,13 +29,14 @@
    */
   var ConfigService = /** @class */ (function () {
       function ConfigService(data) {
+          this.data = data;
           this.space_id = '';
           this.environment = '';
           this.delivery_accessToken = '';
-          if (data) {
-              this.space_id = data.space_id;
-              this.environment = data.environment;
-              this.delivery_accessToken = data.delivery_accessToken;
+          if (this.data) {
+              this.space_id = this.data.space_id;
+              this.environment = this.data.environment;
+              this.delivery_accessToken = this.data.delivery_accessToken;
           }
       }
       ConfigService.decorators = [
@@ -54,6 +55,11 @@
       ConfigService.prototype.environment;
       /** @type {?} */
       ConfigService.prototype.delivery_accessToken;
+      /**
+       * @type {?}
+       * @private
+       */
+      ConfigService.prototype.data;
   }
 
   /**
@@ -236,6 +242,14 @@
            */
           function (error) { return _this.handleError(error); })));
       };
+      CapContentfulService.decorators = [
+          { type: core.Injectable }
+      ];
+      /** @nocollapse */
+      CapContentfulService.ctorParameters = function () { return [
+          { type: http.HttpClient },
+          { type: ConfigService }
+      ]; };
       return CapContentfulService;
   }());
   if (false) {
